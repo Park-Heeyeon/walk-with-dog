@@ -1,5 +1,7 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -12,12 +14,18 @@ export default function Home() {
           sizes="(max-width: 1024px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-1/3 inset-0 flex flex-col items-center space-y-4 md:space-y-6">
-          <Button className="bg-[#f5f0e1] text-[#8B4513] text-md md:text-xl font-semibold rounded-full w-1/2 py-3 md:py-7">
+          <Link
+            href="/login"
+            className="bg-[#f5f0e1] text-[#8B4513] text-center text-md md:text-xl font-semibold rounded-full px-8 md:px-12 py-2 md:py-5"
+          >
             Login
-          </Button>
-          <Button className="bg-[#e6d1b3] text-[#8B4513] text-md md:text-xl font-semibold rounded-full w-1/2 py-3 md:py-7">
+          </Link>
+          <Link
+            href="/signup"
+            className="bg-[#e6d1b3] text-[#8B4513] text-center text-md md:text-xl font-semibold rounded-full px-8 md:px-12 py-2 md:py-5"
+          >
             SignUp
-          </Button>
+          </Link>
         </div>
       </div>
     </div>

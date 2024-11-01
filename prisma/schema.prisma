@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int    @id @default(autoincrement())
+  userId    String @unique
+  name      String?
+  password  String
+  address   String
+  dogInfo   Dog[]  @relation("UserDogs")
+}
+
+model Dog {
+  id          Int     @id @default(autoincrement())
+  name        String
+  age         String
+  breed       String
+  gender      String
+  fixedStatus Boolean @default(false)
+  userId      String  // userId를 String으로 변경
+  user        User    @relation("UserDogs", fields: [userId], references: [userId]) // 관계 설정
+}
