@@ -56,14 +56,14 @@ const LoginPage: React.FC = () => {
   const handleKakao = async () => {
     await signIn("kakao", {
       redirect: true,
-      callbackUrl: "/",
+      callbackUrl: "/signup",
     });
   };
 
   const handleNaver = async () => {
     await signIn("naver", {
       redirect: true,
-      callbackUrl: "/",
+      callbackUrl: "/signup",
     });
   };
 
@@ -104,13 +104,13 @@ const LoginPage: React.FC = () => {
           />
           <div className="w-full flex justify-center space-x-2">
             <button
-              className="w-[40%] transform rounded-md bg-[#fcdc34] px-1 py-2 md:px-4 md:py-4 md:text-xl tracking-wide text-white transition-colors duration-200"
+              className="w-[40%] transform rounded-md bg-[#dac96d] px-1 py-2 md:px-4 md:py-4 md:text-xl tracking-wide text-white transition-colors duration-200"
               onClick={handleKakao}
             >
               Kakao Login
             </button>
             <button
-              className="w-[40%] transform rounded-md bg-green-400 px-1 py-2 md:px-4 md:py-4 md:text-xl tracking-wide text-white transition-colors duration-200"
+              className="w-[40%] transform rounded-md bg-[#61cb5a] px-1 py-2 md:px-4 md:py-4 md:text-xl tracking-wide text-white transition-colors duration-200"
               onClick={handleNaver}
             >
               Naver Login

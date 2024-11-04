@@ -2,7 +2,7 @@
 CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "userId" TEXT NOT NULL,
-    "name" TEXT,
+    "nickname" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "address" TEXT NOT NULL
 );
