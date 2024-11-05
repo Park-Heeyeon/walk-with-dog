@@ -4,6 +4,8 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const address = searchParams.get("address");
 
+  if (!address) return;
+
   const neighborDogs = await prisma.user.findMany({
     where: {
       address,

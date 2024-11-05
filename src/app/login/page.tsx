@@ -95,11 +95,11 @@ const LoginPage: React.FC = () => {
           <Button
             type="submit"
             text="Submit"
-            className="w-full h-auto py-2 md:py-4 md:text-xl bg-beige text-brown"
+            className="w-full h-auto py-2 md:py-4 md:text-xl bg-[#A07840] text-white"
           />
           <Button
             text="Sign Up"
-            className="w-full h-auto py-2 md:py-4 md:text-xl bg-depBeige text-brown"
+            className="w-full h-auto py-2 md:py-4 md:text-xl bg-[#E0C7A3] text-white"
             clickEvent={onClickSignupBtn}
           />
           <div className="w-full flex justify-center space-x-2">

@@ -1,15 +1,14 @@
 "use client";
 
-import DogFormLayout from "@/components/signup/DogFormLayout";
-import UserFormLayout from "@/components/signup/UserFormLayout";
+import DogProfile from "@/components/signup/DogProfile";
+import UserProfile from "@/components/signup/UserProfile";
 import { useState } from "react";
 
 const SignupPage: React.FC = () => {
-  const [step, setStep] = useState(1);
-
   return (
-    <div>
-      {step === 1 ? <UserFormLayout /> : step === 2 ? <DogFormLayout /> : null}
+    <div className="w-[100%] m-auto">
+      {/* <UserProfile /> */}
+      <DogProfile />
     </div>
   );
 };

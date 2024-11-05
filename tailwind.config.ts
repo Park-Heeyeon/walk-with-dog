@@ -11,9 +11,11 @@ const config: Config = {
     extend: {
       colors: {
         beige: "#f5f0e1",
+        midBeige: "#E0C7A3",
         depBeige: "#e6d1b3",
         brown: "#A57553",
-        depBrown: "#8B4513",
+        midBrown: "#A07840",
+        depBrown: "#8E6344",
 
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
