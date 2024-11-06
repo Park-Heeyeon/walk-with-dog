@@ -1,41 +1,50 @@
 "use client";
-
+import * as z from "zod";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { UserFormSchema } from "@/schemas/UserFormSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "../../components/ui/form";
 import InputField from "../common/InputField";
 import DaumPostcode from "react-daum-postcode";
 import useModalStore from "@/hooks/modalStore";
-import * as z from "zod";
 import { postApi } from "@/utils/fetchApi";
 import ConfirmModal from "../modal/ConfirmModal";
-import { useState } from "react";
+import { FormDataType } from "@/app/signup/page";
+import { User } from "@/types/UserInfoType";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface UserProfileFormType {
-  userId: string;
-  password: string;
-  nickname: string;
-  address: string;
+interface UserProfileProps {
+  formData: FormDataType;
+  setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
+  onNext: () => void;
 }
 
 interface AddrSearchModalProps {
   addrComplete: (data: any) => void;
 }
+const UserProfile: React.FC<UserProfileProps> = ({
+  formData,
+  setFormData,
+  onNext,
+}) => {
+  const {
+    userInfo: { userId = "", password = "", nickname = "", address = "" } = {},
+  } = formData || {};
 
-const UserProfile: React.FC = () => {
-  const [isIdDisabled, setIsIdDisabled] = useState<boolean>(false);
-  const [isNicknameDisabled, setIsNicknameDisabled] = useState<boolean>(false);
+  const [isIdDisabled, setIsIdDisabled] = useState<boolean>(!!userId);
+  const [isNicknameDisabled, setIsNicknameDisabled] = useState<boolean>(
+    !!nickname
+  );
 
   const { open, close } = useModalStore();
 
   const form = useForm<z.infer<typeof UserFormSchema>>({
     resolver: zodResolver(UserFormSchema),
     defaultValues: {
-      userId: "",
-      password: "",
-      nickname: "",
-      address: "",
+      userId,
+      password,
+      nickname,
+      address,
     },
   });
 
@@ -136,20 +145,23 @@ const UserProfile: React.FC = () => {
     close();
   };
 
-  const handleOnSubmit = (data: UserProfileFormType) => {
-    // 다음으로 이동해야함
-    console.log("Submitted data:", data);
+  const handleFormSubmit = (data: User) => {
+    setFormData((prev) => ({ ...prev, userInfo: data }));
+    onNext();
   };
 
   return (
     <div className="w-[80%] smax-w-md mx-auto">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleOnSubmit)}
+          onSubmit={form.handleSubmit(handleFormSubmit)}
           className="space-y-4"
         >
+          <h2 className="text-2xl font-semibold text-center text-depBrown mb-6">
+            사용자 정보 입력
+          </h2>
           <div className="flex w-full">
-            <InputField<UserProfileFormType>
+            <InputField<User>
               control={form.control}
               label="아이디"
               name="userId"
@@ -169,7 +181,7 @@ const UserProfile: React.FC = () => {
               중복 확인
             </button>
           </div>
-          <InputField<UserProfileFormType>
+          <InputField<User>
             control={form.control}
             label="비밀번호"
             name="password"
@@ -177,7 +189,7 @@ const UserProfile: React.FC = () => {
             desc="영문 숫자 특수문자 조합 7글자 이상"
           />
           <div className="flex">
-            <InputField<UserProfileFormType>
+            <InputField<User>
               control={form.control}
               label="닉네임"
               name="nickname"
@@ -196,7 +208,7 @@ const UserProfile: React.FC = () => {
             </div>
           </div>
           <div className="flex">
-            <InputField<UserProfileFormType>
+            <InputField<User>
               control={form.control}
               label="주소"
               name="address"

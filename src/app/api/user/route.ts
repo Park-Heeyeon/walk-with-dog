@@ -6,7 +6,7 @@ interface RequestBody {
   userId: string;
   password: string;
   address: string;
-  dogInfo: Dog[];
+  dogInfo: Dog;
 }
 
 interface Dog {
@@ -29,13 +29,13 @@ export async function POST(request: Request) {
         password: await bcrypt.hash(body.password, 10),
         address: body.address,
         dogInfo: {
-          create: body.dogInfo.map((dog) => ({
-            name: dog.name,
-            age: dog.age.toString(),
-            breed: dog.breed,
-            gender: dog.gender,
-            fixedStatus: dog.fixedStatus,
-          })),
+          create: {
+            name: body.dogInfo.name,
+            age: body.dogInfo.age,
+            breed: body.dogInfo.breed,
+            gender: body.dogInfo.gender,
+            fixedStatus: body.dogInfo.fixedStatus,
+          },
         },
       },
     });

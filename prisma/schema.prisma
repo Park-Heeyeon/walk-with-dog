@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  userId    String @unique
-  nickname  String @unique
-  password  String
-  address   String
-  dogInfo   Dog[]  @relation("UserDogs")
+  id       Int    @id @default(autoincrement())
+  userId   String @unique
+  nickname String @unique
+  password String
+  address  String
+  dogInfo  Dog?   @relation("UserDog") // Dog와의 관계만 정의, fields와 references는 생략
 }
 
 model Dog {
@@ -26,6 +26,6 @@ model Dog {
   breed       String
   gender      String
   fixedStatus Boolean @default(false)
-  userId      String  // userId를 String으로 변경
-  user        User    @relation("UserDogs", fields: [userId], references: [userId]) // 관계 설정
+  userId      String  @unique // userId는 고유해야 함
+  user        User    @relation("UserDog", fields: [userId], references: [userId]) // 관계와 외래 키를 이곳에서 설정
 }

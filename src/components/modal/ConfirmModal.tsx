@@ -14,11 +14,11 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ msg, onConfirm }) => {
   };
 
   return (
-    <div className="text-center bg-beige p-6 rounded-lg shadow-lg">
-      <h3 className="text-depBrown text-md font-semibold mb-2">확인</h3>
-      <p className="text-depBrown font-semibold text-md mb-4">{msg}</p>
+    <div className="text-center bg-beige p-8 rounded-lg shadow-lg">
+      {/* <h3 className="text-depBrown text-md font-semibold mb-2">확인</h3> */}
+      <p className="text-brown font-semibold text-md mb-3">{msg}</p>
       <button
-        className="px-4 py-2 bg-depBrown text-white rounded text-sm hover:bg-darkBrown transition duration-200"
+        className="px-4 py-1 bg-[#C6A16C] text-white rounded text-sm hover:bg-darkBrown transition duration-200"
         onClick={onClickConfirmBtn}
       >
         확인

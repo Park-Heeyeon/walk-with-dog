@@ -7,6 +7,8 @@ import Button from "@/components/common/Button";
 import { useRouter } from "next/navigation";
 import { getProviders, signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
+import useModalStore from "@/hooks/modalStore";
+import ConfirmModal from "@/components/modal/ConfirmModal";
 
 interface LoginFormType {
   userId: string;
@@ -15,16 +17,17 @@ interface LoginFormType {
 
 const LoginPage: React.FC = () => {
   const router = useRouter();
+  const { open } = useModalStore();
 
   const [providers, setProviders] = useState(null);
 
-  useEffect(() => {
-    async () => {
-      const res: any = await getProviders();
-      console.log(res);
-      setProviders(res);
-    };
-  }, []);
+  // useEffect(() => {
+  //   async () => {
+  //     const res: any = await getProviders();
+  //     console.log(res);
+  //     setProviders(res);
+  //   };
+  // }, []);
 
   const form = useForm({
     defaultValues: {
@@ -36,34 +39,47 @@ const LoginPage: React.FC = () => {
   const handleOnSubmit = async (data: LoginFormType) => {
     const { userId, password } = data;
 
-    if (!userId || !password) {
-      console.log("희연 아이디를 입력해주세요.");
+    if (!userId) {
+      open(ConfirmModal, { msg: "아이디를 입력해주세요" });
       return;
     }
 
-    await signIn("credentials", {
-      userId,
-      password,
-      redirect: true,
-      callbackUrl: "/",
-    });
+    if (!password) {
+      open(ConfirmModal, { msg: "비밀번호를 입력해주세요" });
+      return;
+    }
+
+    try {
+      const result = await signIn("credentials", {
+        userId,
+        password,
+        redirect: false, // 리디렉션을 방지
+      });
+
+      if (result?.error) {
+        open(ConfirmModal, { msg: "아이디 또는 비밀번호가 틀렸습니다." });
+      } else {
+        // 로그인 성공 시 처리
+        router.push("/"); // 홈으로 이동
+      }
+    } catch (error) {
+      open(ConfirmModal, { msg: "로그인 중 오류가 발생했습니다." });
+    }
   };
 
   const onClickSignupBtn = () => {
-    // router.push("/signup");
+    router.push("/signup");
   };
 
   const handleKakao = async () => {
     await signIn("kakao", {
-      redirect: true,
-      callbackUrl: "/signup",
+      redirect: false,
     });
   };
 
   const handleNaver = async () => {
     await signIn("naver", {
-      redirect: true,
-      callbackUrl: "/signup",
+      redirect: false,
     });
   };
 
