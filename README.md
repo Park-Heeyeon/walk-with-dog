@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 함께 산책할 개 🐾
 
-## Getting Started
+"함께 산책할 개" 프로젝트는 가까운 지역에 사는 반려견 주인들이 쉽게 소통하고 함께 산책할 친구를 찾을 수 있도록 돕기 위해 만들어진 서비스입니다.
 
-First, run the development server:
+## 프로젝트 개요
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+이 프로젝트는 **Next.js**를 기반으로 개발되었으며, **pnpm**과 **Vite**를 사용하여 효율적인 패키지 관리 및 빌드 환경을 제공합니다. 사용자 인증, 채팅 기능, 그리고 지역 기반 반려견 검색 기능 등을 통해 사용자들이 간편하게 소통하고 만남을 주선할 수 있습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 주요 기능
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **회원가입 및 로그인**
+  - **Zod**를 사용한 회원가입 정보 유효성 검사
+  - **useFunnel** 패턴을 활용하여 단계별 회원가입 진행
+  - **NextAuth** 및 **bcrypt**를 통한 안전한 로그인 및 비밀번호 해시 암호화
+- **메인 화면 분기 처리**
+  - 로그인 여부에 따라 다른 메인 화면 제공
+    - **로그인 시**: 같은 구 내의 반려견 아이콘을 지도에 표시
+    - **비로그인 시**: 간략한 서비스 소개 및 로그인/회원가입 페이지로 이동 가능한 버튼 제공
+- **반려견 위치 표시**
+  - **카카오맵 API**를 사용하여 사용자가 설정한 위치를 지도에 표시
+  - 같은 구 내의 반려견 아이콘을 지도에 표시하여 사용자들이 근처 산책 친구를 쉽게 찾을 수 있도록 지원
+- **실시간 채팅**
+  - **Socket.io**를 이용한 실시간 채팅 기능 제공
+  - 같은 구 내의 사용자끼리만 채팅 가능
+- **상태 관리 및 데이터 관리**
+  - **Zustand**를 사용한 전역 상태 관리
+  - **React-Query**를 통해 서버와의 데이터 동기화 최적화
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 기술 스택
 
-## Learn More
+- **프론트엔드**: Next.js, Vite
+- **스타일링**: TailwindCSS, shadcn/ui
+- **상태 관리**: Zustand
+- **데이터 관리**: React-Query
+- **지도**: 카카오맵 API
+- **입력 유효성 검사**: Zod
+- **사용자 인증**: NextAuth, bcrypt
+- **실시간 통신**: Socket.io
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 기능별 화면
+- **메인화면**
+  - 미로그인
+    <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/48e43220-8a8f-4207-8b72-4599ad4e53c9">
+  - 로그인
+    
+- **로그인화면**
+  <img width="366" alt="스크린샷 2024-11-08 오후 5 28 54" src="https://github.com/user-attachments/assets/27715eeb-ff91-4c55-9ee8-29664d00bb66">
+- **회원가입화면**
+  <img width="370" alt="스크린샷 2024-11-08 오후 5 28 10" src="https://github.com/user-attachments/assets/961fe10c-7e6e-4368-b8ba-58a426c99b23">
+  <img width="366" alt="스크린샷 2024-11-08 오후 5 31 03" src="https://github.com/user-attachments/assets/ab612fea-bc16-4df0-80c9-b9fa32d45154">
