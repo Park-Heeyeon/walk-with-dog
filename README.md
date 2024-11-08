@@ -38,13 +38,20 @@
 - **실시간 통신**: Socket.io
 
 ## 기능별 화면
+
 - **메인화면**
-  - 미로그인
-    <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/48e43220-8a8f-4207-8b72-4599ad4e53c9">
-  - 로그인
-    
+  - **미로그인**
+    <p align="center">
+      <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/48e43220-8a8f-4207-8b72-4599ad4e53c9">
+    </p>
 - **로그인화면**
-  <img width="366" alt="스크린샷 2024-11-08 오후 5 28 54" src="https://github.com/user-attachments/assets/27715eeb-ff91-4c55-9ee8-29664d00bb66">
+    <p align="center">
+      <img width="366" alt="스크린샷 2024-11-08 오후 5 28 54" src="https://github.com/user-attachments/assets/27715eeb-ff91-4c55-9ee8-29664d00bb66">
+    </p>
+
 - **회원가입화면**
-  <img width="370" alt="스크린샷 2024-11-08 오후 5 28 10" src="https://github.com/user-attachments/assets/961fe10c-7e6e-4368-b8ba-58a426c99b23">
-  <img width="366" alt="스크린샷 2024-11-08 오후 5 31 03" src="https://github.com/user-attachments/assets/ab612fea-bc16-4df0-80c9-b9fa32d45154">
+  <p align="center">
+    <img width="370" alt="스크린샷 2024-11-08 오후 5 28 10" src="https://github.com/user-attachments/assets/961fe10c-7e6e-4368-b8ba-58a426c99b23">
+    <img width="366" alt="스크린샷 2024-11-08 오후 5 31 03" src="https://github.com/user-attachments/assets/ab612fea-bc16-4df0-80c9-b9fa32d45154">
+  </p>
+
