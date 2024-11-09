@@ -43,6 +43,11 @@
     <p align="center">
       <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/48e43220-8a8f-4207-8b72-4599ad4e53c9">
     </p>
+  - **로그인**
+    <p align="center">
+      ![스크린샷 2024-11-09 오후 9 42 05](https://github.com/user-attachments/assets/079ec411-cf2c-4e7e-8cda-70530ec4e7f5)
+    </p>
+  
 - **로그인화면**
     <p align="center">
       <img width="366" alt="스크린샷 2024-11-08 오후 5 28 54" src="https://github.com/user-attachments/assets/27715eeb-ff91-4c55-9ee8-29664d00bb66">
