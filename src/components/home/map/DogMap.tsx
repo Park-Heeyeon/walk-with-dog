@@ -1,6 +1,9 @@
+import useModalStore from "@/hooks/modalStore";
 import { fetchApi } from "@/utils/fetchApi";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import DogInfoBox from "./DogInfoBox";
+import { Dog } from "@/types/UserInfoType";
 
 declare global {
   interface Window {
@@ -11,6 +14,8 @@ declare global {
 const DogMap: React.FC = () => {
   const { data } = useSession();
   const user = data?.user; // user가 존재할 때만 값을 사용할 수 있도록 안전하게 처리
+  const [isOpenBottom, setIsOpenBottom] = useState(false);
+  const [currDogInfo, setCurrDogInfo] = useState<Dog | null>(null);
 
   // 사용자와 같은 구 내의 이웃 강아지 조회
   const getNeighborDogs = async () => {
@@ -121,6 +126,8 @@ const DogMap: React.FC = () => {
 
             window.kakao.maps.event.addListener(dogMarker, "click", () => {
               map.panTo(dogMarkerPosition);
+              setIsOpenBottom(true);
+              setCurrDogInfo(dog.dogInfo);
             });
           })
           .catch((err) => {
@@ -158,19 +165,19 @@ const DogMap: React.FC = () => {
     return () => {
       document.head.removeChild(script);
     };
-  }, [user]);
+  }, []);
 
   return (
     <div className="w-full h-full">
       <div id="map" className="w-[100%] h-[100%]"></div>
+      {isOpenBottom && (
+        <DogInfoBox
+          currDogInfo={currDogInfo}
+          setIsOpenBottom={setIsOpenBottom}
+        />
+      )}
     </div>
   );
 };
 
 export default DogMap;
-
-const DogInfoBox = () => {
-  return (
-    <div className="p-4 bg-white border-none">강아지 정보 박스입니다!</div>
-  );
-};
