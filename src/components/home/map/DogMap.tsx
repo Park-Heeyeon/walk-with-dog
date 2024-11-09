@@ -89,6 +89,7 @@ const DogMap: React.FC = () => {
 
       window.kakao.maps.event.addListener(userMarker, "click", () => {
         map.panTo(userMarkerPosition);
+        setIsOpenBottom(false);
       });
 
       // 이웃 강아지 마커 생성

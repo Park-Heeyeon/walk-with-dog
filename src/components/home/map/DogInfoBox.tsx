@@ -11,10 +11,6 @@ const DogInfoBox: React.FC<DogInfoBoxProps> = ({
   currDogInfo,
   setIsOpenBottom,
 }) => {
-  useEffect(() => {
-    console.log("희연 currDogInfo", currDogInfo);
-  }, [currDogInfo]);
-
   if (!currDogInfo) return null;
 
   const { name, age, breed, gender, fixedStatus } = currDogInfo;
