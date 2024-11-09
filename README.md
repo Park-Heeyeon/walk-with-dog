@@ -44,7 +44,7 @@
       <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/48e43220-8a8f-4207-8b72-4599ad4e53c9">
       <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/28d85b3e-53b2-4915-8e33-bc7ec4f91753">
       <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/2e42df3f-0891-41a9-a805-401a41c32cc8">
-      <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src=https://github.com/user-attachments/assets/0be8172c-032e-4c05-b265-21b9f2b6e103">
+      <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src=https://github.com/user-attachments/assets/c5010867-ef39-4d6a-9c31-c275bbbb7f58">
     </p>
     
 - **로그인화면**
