@@ -45,7 +45,7 @@
     </p>
   - **로그인**
     <p align="center">
-      ![스크린샷 2024-11-09 오후 9 42 05](https://github.com/user-attachments/assets/079ec411-cf2c-4e7e-8cda-70530ec4e7f5)
+     <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/f4a3ba07-7adc-4346-8dbe-52820a7650c5">
     </p>
   
 - **로그인화면**
