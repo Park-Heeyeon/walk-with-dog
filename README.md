@@ -43,7 +43,7 @@
     <p align="center">
       <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/48e43220-8a8f-4207-8b72-4599ad4e53c9">
       <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/28d85b3e-53b2-4915-8e33-bc7ec4f91753">
-      <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/3fbeeca0-76d6-49ca-90ac-36ae55fca2eb">
+      <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/3d872478-8476-42ab-a8ab-3ca9e5a0a7a7">
       <img width="367" alt="스크린샷 2024-11-08 오후 5 28 02" src="https://github.com/user-attachments/assets/2e42df3f-0891-41a9-a805-401a41c32cc8">
     </p>
     
