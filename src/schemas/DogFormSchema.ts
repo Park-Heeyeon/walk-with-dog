@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 const regex = /^[가-힣]{1,10}$/; // 한글로 최대 10글자
-const numRegex = /^(0|1[0-9]|20)$/; // 0에서 20까지의 숫자 허용
+const numRegex = /^([0-9]|1[0-9]|20)$/; // 0에서 20까지의 숫자 허용
 
 export const DogFormSchema = z.object({
   name: z
