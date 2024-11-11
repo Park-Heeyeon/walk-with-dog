@@ -3,6 +3,7 @@
 import { Loadingbar } from "@/components/common/Loadingbar";
 import GuestHome from "@/components/home/GuestHome";
 import UserHome from "@/components/home/UserHome";
+import { UserHomeProvider } from "@/components/home/UserHomeProvider";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
@@ -18,5 +19,15 @@ export default function Home() {
     return <Loadingbar />; // 또는 로딩 스피너 컴포넌트를 추가해도 좋습니다.
   }
 
-  return <>{session?.user ? <UserHome /> : <GuestHome />}</>;
+  return (
+    <>
+      {session?.user ? (
+        <UserHomeProvider>
+          <UserHome />
+        </UserHomeProvider>
+      ) : (
+        <GuestHome />
+      )}
+    </>
+  );
 }

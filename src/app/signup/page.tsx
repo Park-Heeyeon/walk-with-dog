@@ -4,7 +4,7 @@ import Funnel from "@/components/funnel/Funnel";
 import DogProfile from "@/components/signup/DogProfile";
 import UserProfile from "@/components/signup/UserProfile";
 import useFunnel from "@/hooks/funnelStore";
-import { Dog, User } from "@/types/UserInfoType";
+import { Dog, User } from "@/types/userInfo";
 import { useState } from "react";
 
 const steps = ["UserProfile", "DogProfile"];

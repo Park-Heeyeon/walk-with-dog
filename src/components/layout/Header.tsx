@@ -1,10 +1,14 @@
 import Image from "next/image";
+import { useUserHome } from "../home/UserHomeProvider";
 
-interface HeaderProps {
-  setIsSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const Header: React.FC = () => {
+  const { setIsSideOpen, isBottomOpen, setIsBottomOpen } = useUserHome();
 
-const Header: React.FC<HeaderProps> = ({ setIsSideOpen }) => {
+  const onClickHambugerIcon = () => {
+    if (isBottomOpen) setIsBottomOpen(false);
+    setIsSideOpen(true);
+  };
+
   return (
     <header className="w-full">
       <nav className="bg-beige flex items-center py-4 justify-between">
@@ -22,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ setIsSideOpen }) => {
         {/* 햄버거 아이콘 */}
         <div
           className="flex items-center justify-end pr-4"
-          onClick={() => setIsSideOpen(true)}
+          onClick={onClickHambugerIcon}
         >
           <Image
             src="/images/icon/hambuger_icon.svg"

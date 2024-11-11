@@ -10,7 +10,7 @@ import useModalStore from "@/hooks/modalStore";
 import { postApi } from "@/utils/fetchApi";
 import ConfirmModal from "../modal/ConfirmModal";
 import { FormDataType } from "@/app/signup/page";
-import { User } from "@/types/UserInfoType";
+import { User } from "@/types/userInfo";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface UserProfileProps {

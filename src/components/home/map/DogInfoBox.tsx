@@ -1,18 +1,16 @@
-import { Dog } from "@/types/UserInfoType";
+import { Dog } from "@/types/userInfo";
 import Image from "next/image";
 import React, { useEffect } from "react";
+import { useUserHome } from "../UserHomeProvider";
 
 interface DogInfoBoxProps {
   currDogInfo: Dog | null;
-  setIsOpenBottom: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DogInfoBox: React.FC<DogInfoBoxProps> = ({
-  currDogInfo,
-  setIsOpenBottom,
-}) => {
+const DogInfoBox: React.FC<DogInfoBoxProps> = ({ currDogInfo }) => {
   if (!currDogInfo) return null;
 
+  const { setIsBottomOpen } = useUserHome();
   const { name, age, breed, gender, fixedStatus } = currDogInfo;
 
   return (
@@ -28,7 +26,7 @@ const DogInfoBox: React.FC<DogInfoBoxProps> = ({
           </ul>
           <div
             className="absolute right-2 top-2"
-            onClick={() => setIsOpenBottom(false)}
+            onClick={() => setIsBottomOpen(false)}
           >
             <Image
               src="/images/icon/close_icon.png"

@@ -3,7 +3,8 @@ import { fetchApi } from "@/utils/fetchApi";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import DogInfoBox from "./DogInfoBox";
-import { Dog } from "@/types/UserInfoType";
+import { Dog } from "@/types/userInfo";
+import { useUserHome } from "../UserHomeProvider";
 
 declare global {
   interface Window {
@@ -13,8 +14,8 @@ declare global {
 
 const DogMap: React.FC = () => {
   const { data } = useSession();
+  const { isBottomOpen, setIsBottomOpen } = useUserHome();
   const user = data?.user; // user가 존재할 때만 값을 사용할 수 있도록 안전하게 처리
-  const [isOpenBottom, setIsOpenBottom] = useState(false);
   const [currDogInfo, setCurrDogInfo] = useState<Dog | null>(null);
 
   // 사용자와 같은 구 내의 이웃 강아지 조회
@@ -89,7 +90,7 @@ const DogMap: React.FC = () => {
 
       window.kakao.maps.event.addListener(userMarker, "click", () => {
         map.panTo(userMarkerPosition);
-        setIsOpenBottom(false);
+        setIsBottomOpen(false);
       });
 
       // 이웃 강아지 마커 생성
@@ -127,7 +128,7 @@ const DogMap: React.FC = () => {
 
             window.kakao.maps.event.addListener(dogMarker, "click", () => {
               map.panTo(dogMarkerPosition);
-              setIsOpenBottom(true);
+              setIsBottomOpen(true);
               setCurrDogInfo(dog.dogInfo);
             });
           })
@@ -171,12 +172,7 @@ const DogMap: React.FC = () => {
   return (
     <div className="w-full h-full">
       <div id="map" className="w-[100%] h-[100%]"></div>
-      {isOpenBottom && (
-        <DogInfoBox
-          currDogInfo={currDogInfo}
-          setIsOpenBottom={setIsOpenBottom}
-        />
-      )}
+      {isBottomOpen && <DogInfoBox currDogInfo={currDogInfo} />}
     </div>
   );
 };

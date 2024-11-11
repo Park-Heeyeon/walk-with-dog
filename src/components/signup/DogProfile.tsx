@@ -7,7 +7,7 @@ import InputField from "../common/InputField";
 import RadioField from "../common/RadioField";
 import { FormDataType } from "@/app/signup/page";
 import React from "react";
-import { Dog } from "@/types/UserInfoType";
+import { Dog } from "@/types/userInfo";
 import { postApi } from "@/utils/fetchApi";
 import ConfirmModal from "../modal/ConfirmModal";
 import useModalStore from "@/hooks/modalStore";

@@ -1,12 +1,9 @@
 import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { useUserHome } from "../home/UserHomeProvider";
 
-interface SidebarProps {
-  isSideOpen: boolean;
-  setIsSideOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({ isSideOpen, setIsSideOpen }) => {
+const Sidebar: React.FC = () => {
+  const { isSideOpen, setIsSideOpen } = useUserHome();
   return (
     <div>
       {/* 삼항 연산자를 사용하여 isSideOpen이 true일 때 오버레이 표시 */}
