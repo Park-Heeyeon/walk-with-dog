@@ -16,7 +16,9 @@ const DogMap: React.FC = () => {
   const { data } = useSession();
   const { isBottomOpen, setIsBottomOpen } = useUserHome();
   const user = data?.user; // user가 존재할 때만 값을 사용할 수 있도록 안전하게 처리
-  const [currDogInfo, setCurrDogInfo] = useState<Dog | null>(null);
+  const [currDogInfo, setCurrDogInfo] = useState<(Dog & { id: number }) | null>(
+    null
+  );
 
   // 사용자와 같은 구 내의 이웃 강아지 조회
   const getNeighborDogs = async () => {

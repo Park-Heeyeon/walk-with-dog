@@ -5,10 +5,10 @@ import { Form } from "../../components/ui/form";
 import InputField from "@/components/common/InputField";
 import Button from "@/components/common/Button";
 import { useRouter } from "next/navigation";
-import { getProviders, signIn } from "next-auth/react";
-import { useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
 import useModalStore from "@/hooks/modalStore";
 import ConfirmModal from "@/components/modal/ConfirmModal";
+import { socket } from "@/socket";
 
 interface LoginFormType {
   userId: string;
@@ -18,16 +18,7 @@ interface LoginFormType {
 const LoginPage: React.FC = () => {
   const router = useRouter();
   const { open } = useModalStore();
-
-  const [providers, setProviders] = useState(null);
-
-  // useEffect(() => {
-  //   async () => {
-  //     const res: any = await getProviders();
-  //     console.log(res);
-  //     setProviders(res);
-  //   };
-  // }, []);
+  const { data: session } = useSession();
 
   const form = useForm({
     defaultValues: {

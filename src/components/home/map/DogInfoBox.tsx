@@ -1,17 +1,20 @@
 import { Dog } from "@/types/userInfo";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React from "react";
 import { useUserHome } from "../UserHomeProvider";
+import { useRouter } from "next/navigation";
 
 interface DogInfoBoxProps {
-  currDogInfo: Dog | null;
+  currDogInfo: (Dog & { id: number }) | null;
 }
 
 const DogInfoBox: React.FC<DogInfoBoxProps> = ({ currDogInfo }) => {
   if (!currDogInfo) return null;
 
+  const router = useRouter();
+
   const { setIsBottomOpen } = useUserHome();
-  const { name, age, breed, gender, fixedStatus } = currDogInfo;
+  const { id, name, age, breed, gender, fixedStatus } = currDogInfo;
 
   return (
     <div className="absolute bottom-0 z-50 w-[100%] h-[30%] bg-beige shadow-xl p-4 rounded-t-xl flex justify-center items-center">
@@ -37,7 +40,10 @@ const DogInfoBox: React.FC<DogInfoBoxProps> = ({ currDogInfo }) => {
           </div>
         </div>
         <div className="w-full flex justify-center mt-4">
-          <button className="text-md font-semibold px-4 py-2 text-beige bg-brown rounded-lg">
+          <button
+            className="text-md font-semibold px-4 py-2 text-beige bg-brown rounded-lg"
+            onClick={() => router.push(`/messages/${id}`)}
+          >
             같이 산책하기
           </button>
         </div>

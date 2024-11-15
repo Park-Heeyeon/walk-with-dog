@@ -1,9 +1,26 @@
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { useUserHome } from "../home/UserHomeProvider";
+import { useRouter } from "next/navigation";
+import ConfirmModal from "../modal/ConfirmModal";
+import useModalStore from "@/hooks/modalStore";
 
 const Sidebar: React.FC = () => {
   const { isSideOpen, setIsSideOpen } = useUserHome();
+  const { open } = useModalStore();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      const result = await signOut({
+        redirect: false, // 리디렉션을 방지
+      });
+      router.push("/"); // 홈으로 이동
+    } catch (error) {
+      open(ConfirmModal, { msg: "로그아웃 중 오류가 발생했습니다." });
+    }
+  };
+
   return (
     <div>
       {/* 삼항 연산자를 사용하여 isSideOpen이 true일 때 오버레이 표시 */}
@@ -30,8 +47,8 @@ const Sidebar: React.FC = () => {
           />
         </div>
         <ul className="mt-12 ml-4 space-y-3 text-brown font-semibold text-lg">
-          <li>채팅방</li>
-          <li onClick={() => signOut()}>로그아웃</li>
+          <li onClick={() => router.push("/chat")}>채팅방</li>
+          <li onClick={handleSignOut}>로그아웃</li>
         </ul>
       </div>
     </div>
