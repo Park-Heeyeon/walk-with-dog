@@ -1,17 +1,30 @@
 "use client";
 
 import { socket } from "@/socket";
+import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function ChatRoom() {
-  const { id } = useParams();
+  const { id } = useParams(); // URL 경로 파라미터 가져오기
+  const { data: session } = useSession();
 
   useEffect(() => {
-    if (socket.connected) {
-      socket.emit("join", { id });
+    if (session?.user?.userId && socket.connected) {
+      console.log("연결완료!");
+      socket.emit("join", { id: session.user.userId });
+
+      // 서버에서 보내는 채팅 메시지 받기
+      // socket.on("chat message", (msg) => {
+      //   setMessages((prevMessages) => [...prevMessages, msg]);
+      // });
     }
-  }, []);
+
+    // 컴포넌트가 언마운트될 때 소켓 리스너 정리
+    return () => {
+      socket.off("chat message");
+    };
+  }, [session?.user?.userId]);
 
   return (
     <div className="flex flex-col justify-between w-full h-screen">

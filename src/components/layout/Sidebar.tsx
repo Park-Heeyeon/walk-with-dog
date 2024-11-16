@@ -1,9 +1,9 @@
 import { signOut } from "next-auth/react";
 import Image from "next/image";
-import { useUserHome } from "../home/UserHomeProvider";
 import { useRouter } from "next/navigation";
 import ConfirmModal from "../modal/ConfirmModal";
 import useModalStore from "@/hooks/modalStore";
+import { useUserHome } from "@/app/(user)/home/UserHomeProvider";
 
 const Sidebar: React.FC = () => {
   const { isSideOpen, setIsSideOpen } = useUserHome();

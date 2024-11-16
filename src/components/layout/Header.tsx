@@ -1,5 +1,5 @@
+import { useUserHome } from "@/app/(user)/home/UserHomeProvider";
 import Image from "next/image";
-import { useUserHome } from "../home/UserHomeProvider";
 
 const Header: React.FC = () => {
   const { setIsSideOpen, isBottomOpen, setIsBottomOpen } = useUserHome();

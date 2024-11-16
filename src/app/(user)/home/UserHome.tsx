@@ -1,6 +1,6 @@
-import Header from "../layout/Header";
+import Sidebar from "@/components/layout/Sidebar";
 import DogMap from "./map/DogMap";
-import Sidebar from "../common/Sidebar";
+import Header from "@/components/layout/Header";
 import { useUserHome } from "./UserHomeProvider";
 
 const UserHome: React.FC = () => {

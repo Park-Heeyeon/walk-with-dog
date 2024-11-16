@@ -1,8 +1,9 @@
 import { Dog } from "@/types/userInfo";
 import Image from "next/image";
 import React from "react";
-import { useUserHome } from "../UserHomeProvider";
+
 import { useRouter } from "next/navigation";
+import { useUserHome } from "../UserHomeProvider";
 
 interface DogInfoBoxProps {
   currDogInfo: (Dog & { id: number }) | null;
@@ -42,7 +43,7 @@ const DogInfoBox: React.FC<DogInfoBoxProps> = ({ currDogInfo }) => {
         <div className="w-full flex justify-center mt-4">
           <button
             className="text-md font-semibold px-4 py-2 text-beige bg-brown rounded-lg"
-            onClick={() => router.push(`/messages/${id}`)}
+            onClick={() => router.push(`/chat/${id}`)}
           >
             같이 산책하기
           </button>

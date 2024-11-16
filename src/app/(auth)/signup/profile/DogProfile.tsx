@@ -1,17 +1,17 @@
 import { DogFormSchema } from "@/schemas/DogFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "../../components/ui/form";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import InputField from "../common/InputField";
-import RadioField from "../common/RadioField";
-import { FormDataType } from "@/app/signup/page";
 import React from "react";
 import { Dog } from "@/types/userInfo";
 import { postApi } from "@/utils/fetchApi";
-import ConfirmModal from "../modal/ConfirmModal";
 import useModalStore from "@/hooks/modalStore";
 import { useRouter } from "next/navigation";
+import { FormDataType } from "../page";
+import ConfirmModal from "@/components/modal/ConfirmModal";
+import { Form } from "@/components/ui/form";
+import InputField from "@/components/common/InputField";
+import RadioField from "@/components/common/RadioField";
 
 interface DogProfileProps {
   formData: FormDataType;

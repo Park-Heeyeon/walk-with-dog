@@ -1,17 +1,18 @@
 "use client";
+
 import * as z from "zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { UserFormSchema } from "@/schemas/UserFormSchema";
-import { Form } from "../../components/ui/form";
-import InputField from "../common/InputField";
 import DaumPostcode from "react-daum-postcode";
 import useModalStore from "@/hooks/modalStore";
 import { postApi } from "@/utils/fetchApi";
-import ConfirmModal from "../modal/ConfirmModal";
-import { FormDataType } from "@/app/signup/page";
 import { User } from "@/types/userInfo";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FormDataType } from "../page";
+import ConfirmModal from "@/components/modal/ConfirmModal";
+import InputField from "@/components/common/InputField";
+import { Form } from "@/components/ui/form";
 
 interface UserProfileProps {
   formData: FormDataType;

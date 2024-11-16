@@ -1,11 +1,11 @@
 "use client";
 
 import Funnel from "@/components/funnel/Funnel";
-import DogProfile from "@/components/signup/DogProfile";
-import UserProfile from "@/components/signup/UserProfile";
 import useFunnel from "@/hooks/funnelStore";
 import { Dog, User } from "@/types/userInfo";
 import { useState } from "react";
+import UserProfile from "./profile/UserProfile";
+import DogProfile from "./profile/DogProfile";
 
 const steps = ["UserProfile", "DogProfile"];
 

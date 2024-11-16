@@ -1,4 +1,3 @@
-import useModalStore from "@/hooks/modalStore";
 import { fetchApi } from "@/utils/fetchApi";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";

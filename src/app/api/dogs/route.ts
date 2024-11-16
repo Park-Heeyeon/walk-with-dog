@@ -1,4 +1,4 @@
-import prisma from "@/app/lib/prisma";
+import prisma from "@/lib/prisma";
 import { extractDistrict } from "@/utils/extractDistrict";
 
 export async function GET(request: Request) {

@@ -16,57 +16,21 @@ app.prepare().then(() => {
   const httpServer = createServer(handler);
 
   const io = new Server(httpServer);
-  let users = {};
-
-  function getUsersArray() {
-    return Object.keys(users).map((id) => ({ id, nickname: users[id] }));
-  }
 
   io.on("connection", (socket) => {
     console.log("User Connected");
 
-    socket.on("join", async ({ id }) => {
-      console.log(`join chat ${id}`);
-
-      // id가 숫자여야 한다면 숫자로 변환
-      const userId = parseInt(id, 10); // id가 문자열일 경우 숫자로 변환
-
-      // Prisma를 사용하여 사용자 정보를 가져오기
-      try {
-        const user = await prisma.user.findUnique({
-          where: { id: userId }, // id는 String으로 사용
-        });
-
-        if (user) {
-          console.log(`User nickname: ${user.nickname}`);
-
-          if (!users[socket.id]) {
-            io.emit("chat message", `${user.nickname}님이 입장하셨습니다.`);
-            users[socket.id] = user.nickname; // 닉네임을 저장
-          }
-
-          io.emit("users", getUsersArray());
-        } else {
-          console.log("User not found");
-        }
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
+    socket.on("join", ({ id }) => {
+      console.log(`${id}가 채팅방 화면에 접속했습니다.`);
     });
 
-    socket.on("chat message", (msg) => {
-      console.log("message: " + msg);
+    socket.on("chat message", ({ sendId, msg }) => {
+      console.log("sendId:", sendId, "message: " + msg);
       io.emit("chat message", msg);
     });
 
     socket.on("disconnect", () => {
       console.log("user disconnected");
-      const nickName = users[socket.id];
-      if (nickName) {
-        io.emit("chat message", `${nickName}님이 퇴장하셨습니다.`);
-        delete users[socket.id];
-        io.emit("users", getUsersArray());
-      }
     });
   });
 
