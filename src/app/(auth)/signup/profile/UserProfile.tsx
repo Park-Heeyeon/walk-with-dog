@@ -7,7 +7,7 @@ import { UserFormSchema } from "@/schemas/UserFormSchema";
 import DaumPostcode from "react-daum-postcode";
 import useModalStore from "@/hooks/modalStore";
 import { postApi } from "@/utils/fetchApi";
-import { User } from "@/types/userInfo";
+import { User } from "@/types/userInfoType";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormDataType } from "../page";
 import ConfirmModal from "@/components/modal/ConfirmModal";

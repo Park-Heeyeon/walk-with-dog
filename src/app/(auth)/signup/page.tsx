@@ -2,7 +2,7 @@
 
 import Funnel from "@/components/funnel/Funnel";
 import useFunnel from "@/hooks/funnelStore";
-import { Dog, User } from "@/types/userInfo";
+import { Dog, User } from "@/types/userInfoType";
 import { useState } from "react";
 import UserProfile from "./profile/UserProfile";
 import DogProfile from "./profile/DogProfile";

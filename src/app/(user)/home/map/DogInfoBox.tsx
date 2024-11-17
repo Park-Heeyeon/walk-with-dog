@@ -1,4 +1,4 @@
-import { Dog } from "@/types/userInfo";
+import { Dog } from "@/types/userInfoType";
 import Image from "next/image";
 import React from "react";
 

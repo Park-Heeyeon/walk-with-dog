@@ -25,7 +25,8 @@ const handler = NextAuth({
         },
       },
       async authorize(credentials, req) {
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {
+        const port = process.env.PORT || 3000; // PORT가 설정되지 않으면 기본적으로 3000 사용
+        const res = await fetch(`http://localhost:${port}/api/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -60,7 +61,7 @@ const handler = NextAuth({
    */
   callbacks: {
     async jwt({ token, user }) {
-      console.log("ttoken:", token, "user", user);
+      console.log("token:", token, "user", user);
       return { ...token, ...user };
     },
 
@@ -71,9 +72,17 @@ const handler = NextAuth({
     },
   },
 
-  // pages: {
-  //   signIn: "/login",
-  // },
+  cookies: {
+    sessionToken: {
+      name: `next-auth-session-token-${process.env.PORT}`,
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+      },
+    },
+  },
 });
 
 export { handler as GET, handler as POST };

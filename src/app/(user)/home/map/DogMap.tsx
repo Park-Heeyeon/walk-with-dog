@@ -2,7 +2,7 @@ import { fetchApi } from "@/utils/fetchApi";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import DogInfoBox from "./DogInfoBox";
-import { Dog } from "@/types/userInfo";
+import { Dog } from "@/types/userInfoType";
 import { useUserHome } from "../UserHomeProvider";
 
 declare global {
