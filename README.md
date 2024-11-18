@@ -60,5 +60,5 @@
 
 - **채팅화면**
   <p align="center">
-    <img width="366" alt="스크린샷 2024-11-08 오후 5 31 03" src="https://github.com/user-attachments/assets/35da0ef8-6828-4127-80a6-ace0ba8c4976" />
+    <img width="500" alt="스크린샷 2024-11-08 오후 5 31 03" src="https://github.com/user-attachments/assets/35da0ef8-6828-4127-80a6-ace0ba8c4976" />
   </p>
