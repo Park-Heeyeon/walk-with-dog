@@ -3,7 +3,7 @@
 import { socket } from "@/socket";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MessageForm from "./MessageForm";
 import SendMessage from "./SendMessage";
 import { MessageType } from "@/types/messageType";
@@ -13,6 +13,12 @@ export default function ChatRoom() {
   const { id } = useParams(); // URL 경로 파라미터 가져오기
   const { data: session } = useSession();
   const router = useRouter();
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+    if (!messagesEndRef.current) return;
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   const [roomId, setRoomId] = useState<string>("");
   const [messages, setMessages] = useState<MessageType[]>([]);
@@ -71,6 +77,10 @@ export default function ChatRoom() {
     };
   }, [id, session?.user?.id]);
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   // 메시지에서 날짜를 추출하는 함수
   const formatDate = (timestamp: string) => {
     const date = new Date(timestamp);
@@ -122,6 +132,7 @@ export default function ChatRoom() {
                   return <MessageComponent key={msgIndex} msgInfo={msg} />;
                 }
               )}
+              <div ref={messagesEndRef} />
             </div>
           ))}
         </div>
