@@ -108,7 +108,7 @@ const LoginPage: React.FC = () => {
             className="w-full h-auto py-2 md:py-4 md:text-xl bg-[#E0C7A3] text-white"
             clickEvent={onClickSignupBtn}
           />
-          <div className="w-full flex justify-center space-x-2">
+          {/* <div className="w-full flex justify-center space-x-2">
             <button
               className="w-[40%] transform rounded-md bg-[#dac96d] px-1 py-2 md:px-4 md:py-4 md:text-xl tracking-wide text-white transition-colors duration-200"
               onClick={handleKakao}
@@ -121,7 +121,7 @@ const LoginPage: React.FC = () => {
             >
               Naver Login
             </button>
-          </div>
+          </div> */}
         </div>
       </form>
     </Form>
