@@ -35,8 +35,17 @@ export default function ChatRoom() {
       socket.connect();
     }
 
-    socket.emit("join", { roomId: newRoomId });
+    socket.emit("join", { roomId: newRoomId }); // 채팅방 입장
     console.log(`Joined room: ${newRoomId}`);
+
+    // 이전 메시지 수신 핸들러
+    const handlePreviousMessages = (previousMessages: MessageType[]) => {
+      console.log("Previous messages:", previousMessages);
+      setMessages(previousMessages); // 이전 메시지 상태 업데이트
+    };
+
+    // 'previousMessages' 이벤트 리스너 추가
+    socket.on("previousMessages", handlePreviousMessages);
 
     const handleChatMessage = ({
       sendId,
@@ -47,7 +56,6 @@ export default function ChatRoom() {
     }: MessageType & { roomId: string }) => {
       console.log(`Message received in room ${receivedRoomId}`); // 받은 메시지 로그
       if (receivedRoomId === newRoomId) {
-        console.log("gmldus durlfmfxk!!");
         setMessages((prevMessages) => [
           ...prevMessages,
           { sendId, nickname, message, timestamp },
@@ -58,9 +66,30 @@ export default function ChatRoom() {
     socket.on("message", handleChatMessage);
 
     return () => {
+      socket.off("previousMessages", handlePreviousMessages);
       socket.off("message", handleChatMessage);
     };
   }, [id, session?.user?.id]);
+
+  // 메시지에서 날짜를 추출하는 함수
+  const formatDate = (timestamp: string) => {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  };
+
+  // 날짜별로 메시지 그룹화
+  const groupedMessages = messages.reduce((acc: any, message) => {
+    const date = formatDate(message.timestamp);
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(message);
+    return acc;
+  }, {});
 
   return (
     <div className="flex flex-col justify-between w-full h-screen">
@@ -79,14 +108,22 @@ export default function ChatRoom() {
       {/* 채팅 내역 영역 */}
       <div className="flex-grow overflow-y-auto p-4 bg-[#f5f0e1] shadow-inner">
         <div className="flex flex-col space-y-2">
-          {/* 실제 채팅 메시지 리스트 */}
-          {messages.map((msg, index) => {
-            const MessageComponent =
-              parseInt(msg.sendId) === session?.user?.id
-                ? SendMessage
-                : ReceiveMessage;
-            return <MessageComponent key={index} msgInfo={msg} />;
-          })}
+          {/* 날짜별로 그룹화된 메시지 */}
+          {Object.keys(groupedMessages).map((date, index) => (
+            <div key={index} className="flex flex-col space-y-2">
+              <div className="text-center text-brown my-2">{date}</div>
+              {/* 해당 날짜의 메시지 리스트 */}
+              {groupedMessages[date].map(
+                (msg: MessageType, msgIndex: number) => {
+                  const MessageComponent =
+                    parseInt(msg.sendId) === session?.user?.id
+                      ? SendMessage
+                      : ReceiveMessage;
+                  return <MessageComponent key={msgIndex} msgInfo={msg} />;
+                }
+              )}
+            </div>
+          ))}
         </div>
       </div>
 

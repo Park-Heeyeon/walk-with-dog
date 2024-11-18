@@ -6,10 +6,15 @@ type SendMessageProps = {
 
 const SendMessage = ({ msgInfo }: SendMessageProps) => {
   const { message, timestamp } = msgInfo;
+  // 시간만 추출 (시:분)
+  const formatTime = new Date(timestamp).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   return (
     <div className="p-3 rounded-md text-gray-700 max-w-[80%] bg-[#ddd7cb] self-end">
-      <div>{message}</div>
-      <div className="text-xs text-gray-500">{timestamp}</div>
+      <div className="text-midBrown font-semibold">{message}</div>
+      <div className="text-xs text-depBrown">{formatTime}</div>
     </div>
   );
 };

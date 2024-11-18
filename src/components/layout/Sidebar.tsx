@@ -47,7 +47,6 @@ const Sidebar: React.FC = () => {
           />
         </div>
         <ul className="mt-12 ml-4 space-y-3 text-brown font-semibold text-lg">
-          <li onClick={() => router.push("/chat")}>채팅방</li>
           <li onClick={handleSignOut}>로그아웃</li>
         </ul>
       </div>

@@ -22,9 +22,21 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
   console.log("User Connected");
 
-  socket.on("join", ({ roomId }) => {
+  socket.on("join", async ({ roomId }) => {
     socket.join(roomId);
     console.log(`${roomId} 채팅방에 참여했습니다.`);
+
+    // 이전 채팅 내역 조회
+    try {
+      const previousMessages = await prisma.chat.findMany({
+        where: { roomId },
+        orderBy: { timestamp: "asc" },
+      });
+      // 이전 메시지 목록을 전송
+      socket.emit("previousMessages", previousMessages);
+    } catch (error) {
+      console.error("Failed to fetch chat history:", error);
+    }
   });
 
   socket.on("message", async ({ roomId, messageData }) => {
@@ -39,14 +51,24 @@ io.on("connection", (socket) => {
     });
 
     if (user) {
-      console.log("Sending message to room:", messageData); // 방으로 메시지를 보내는지 확인
-      io.to(roomId).emit("message", {
+      const messageRecord = {
         roomId,
         sendId,
         nickname: user.nickname,
         message,
         timestamp,
-      });
+      };
+
+      // 메시지 데이터를 DB에 저장
+      try {
+        await prisma.chat.create({ data: messageRecord });
+        console.log("Message saved to DB:", messageRecord);
+
+        // 저장된 메시지를 채팅방에 전송
+        io.to(roomId).emit("message", messageRecord);
+      } catch (error) {
+        console.error("Failed to save message:", error);
+      }
     } else {
       console.log(`User ${sendId} not found`);
     }
