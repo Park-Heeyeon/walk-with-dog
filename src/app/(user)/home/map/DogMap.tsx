@@ -1,9 +1,9 @@
-import { fetchApi } from "@/utils/fetchApi";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import DogInfoBox from "./DogInfoBox";
 import { Dog } from "@/types/userInfoType";
 import { useUserHome } from "../UserHomeProvider";
+import { useNeighborDogs } from "@/hooks/neighborDogQuery";
 
 declare global {
   interface Window {
@@ -15,25 +15,10 @@ const DogMap: React.FC = () => {
   const { data } = useSession();
   const { isBottomOpen, setIsBottomOpen } = useUserHome();
   const user = data?.user; // user가 존재할 때만 값을 사용할 수 있도록 안전하게 처리
+  const { data: dogs } = useNeighborDogs(); // 컴포넌트에서 useQuery 호출
   const [currDogInfo, setCurrDogInfo] = useState<(Dog & { id: number }) | null>(
     null
   );
-
-  // 사용자와 같은 구 내의 이웃 강아지 조회
-  const getNeighborDogs = async () => {
-    try {
-      // 쿼리 매개변수 생성
-      const queryParams = new URLSearchParams({
-        userId: user?.userId || "",
-        address: user?.address || "",
-      }).toString();
-
-      const response = await fetchApi(`/api/dogs?${queryParams}`);
-      return response; // 강아지 리스트 반환
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   // 주소를 이용해 위도, 경도 값 반환
   const addressSearch = (address: string) => {
@@ -55,7 +40,6 @@ const DogMap: React.FC = () => {
   const createMarker = async () => {
     try {
       const userAddr = await addressSearch(user?.address || "");
-      const dogs = await getNeighborDogs();
       const options = {
         center: new window.kakao.maps.LatLng(userAddr.lat, userAddr.lng), // 지도의 중심좌표를 사용자의 위치로 설정
         level: 3, // 지도의 확대 레벨
